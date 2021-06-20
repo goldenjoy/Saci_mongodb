@@ -1,6 +1,7 @@
 package com.arteno.saci.dao
 
 import com.arteno.saci.document.*
+import org.bson.types.ObjectId
 import org.springframework.data.mongodb.repository.MongoRepository
 import org.springframework.data.repository.query.Param
 import org.springframework.stereotype.Repository
@@ -21,7 +22,7 @@ interface CatPuestoLaboralDao: MongoRepository<CatPuestoLaboral, String>{
 }
 
 @Repository
-interface CatUnidadMedidaDao: MongoRepository<CatUnidadMedida, String>{
+interface CatUnidadMedidaDao: MongoRepository<CatUnidadMedida, ObjectId>{
     fun existsByDesc(@Param("desc") desc: String): Boolean
 }
 

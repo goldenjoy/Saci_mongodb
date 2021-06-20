@@ -46,33 +46,24 @@ function fechaFormato(){
 
         		if (!(form.checkValidity() === false)) {
                     const actionType = $(form).find("#action-type").val().trim();
-                    const urlType = $("#url-type").val().trim();
-                    var desc;
-                    var id;
+                    const url = "/service/" + $("#url-type").val().trim() + "/";
                     var type;
                     var fJson;
                     var json;
-                    var url;
-
-                    if(urlType == "catPeriodoNomina"){
-                        url = "/service/periodoNomina/";
-                    } else if(urlType == "catPuestoLaboral"){
-                        url = "/service/puestoLaboral/";
-                    } else if(urlType == "catUnidadMedida"){
-                        url = "/service/unidadMedida/";
-                    }
 
                     if(actionType === "insert"){
-                        desc = $(form).find('#desc').val().trim();
                         type = "post";
-                        fJson = {desc: desc};
+                        fJson = {
+                            "desc": $(form).find('#desc').val().trim()
+                        }
                     }
 
                     else if(actionType === "update"){
-                        desc = $(form).find('#desc').val().trim();
-                        id = $(form).find('#idItem').val().trim();
                         type = "put";
-                        fJson = {desc: desc, id: id};
+                        fJson = {
+                            "id": $(form).find('#idItem').val().trim(),
+                            "desc": $(form).find('#desc').val().trim()
+                        }
                     }
 
                     json = JSON.stringify(fJson);
@@ -82,11 +73,14 @@ function fechaFormato(){
 				    	url: contextRoot+url,
                         data: json,
                         contentType: "application/json",
+                        dataType: 'json',
 				    	context: this,
 				   	 	cache : false,
 				   	 	async: false,
 				    	success: function(result){
-				    	    //console.log(result);
+				    	    console.log(result);
+				    	    result.id = result.id.toString();
+				    	    console.log(result);
 
                             if(actionType === "insert"){
                                 var table = document.getElementById("tablaCatalogo");
@@ -113,9 +107,9 @@ function fechaFormato(){
                             }
 
                             else if(actionType === "update"){
-                                $("#tdDesc"+id).text(desc);
+                                $("#tdDesc"+result.id).text(result.desc);
                                 $('#updateDescCatalogo').modal('toggle');
-                                $("#tdBtn"+id).html(
+                                $("#tdBtn"+result.id).html(
                                         `<button type="button" class="btn btn-primary btn-icon btn-sm" data-toggle="modal"
                                             onclick="showModal('` + result.id + `', '` + result.desc + `')"
                                             rel="tooltip" title="Actualizar la descripción">

@@ -1,16 +1,17 @@
 package com.arteno.saci.document
 
+import org.bson.types.ObjectId
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 import javax.validation.constraints.Size
 
-@Document(collation = "catUnidadMedida")
+@Document(collection = "catUnidadMedida")
 data class CatUnidadMedida (
     @Id
-    var _id:String,
+    var id: ObjectId = ObjectId(),
 
     @get:Size(min = 3, max = 25)
-    var desc:String){
+    val desc:String){
 
     override fun equals(other:Any?): Boolean {
         other ?: return false
@@ -18,10 +19,10 @@ data class CatUnidadMedida (
         if (this.javaClass != other.javaClass) return false
         other as CatUnidadMedida
 
-        return this._id == other._id
+        return this.id == other.id
     }
 
     override fun hashCode(): Int {
-        return _id.hashCode()
+        return id.hashCode()
     }
 }

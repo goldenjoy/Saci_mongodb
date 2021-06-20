@@ -2,6 +2,7 @@ package com.arteno.saci.controller
 
 import com.arteno.saci.document.*
 import com.arteno.saci.service.*
+import org.bson.types.ObjectId
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 
@@ -19,7 +20,7 @@ class CatPuestoLaboralController(serviceCat: CatPuestoLaboralService): CrudComun
 
 @RestController
 @RequestMapping("/service/unidadMedida")
-class CatUnidadMedidaController(serviceCat: CatUnidadMedidaService): CrudComun<CatUnidadMedida, String>(serviceCat)
+class CatUnidadMedidaController(serviceCat: CatUnidadMedidaService): CrudComun<CatUnidadMedida, ObjectId>(serviceCat)
 
 @RestController
 @RequestMapping("/service/empleado")

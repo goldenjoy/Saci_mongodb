@@ -8,6 +8,7 @@ import com.arteno.saci.service.CatPeriodoNominaService
 import com.arteno.saci.service.CatProductoService
 import com.arteno.saci.service.CatPuestoLaboralService
 import com.arteno.saci.service.CatUnidadMedidaService
+import org.bson.types.ObjectId
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
@@ -37,4 +38,4 @@ class ViewCatPuestoLaboralController(serviceCat: CatPuestoLaboralService, nameVi
 @Controller
 @RequestMapping("/unidadMedida")
 class ViewCatUnidadMedidaController(serviceCat: CatUnidadMedidaService, nameView: String = "catUnidadMedida"):
-        GetAllComun<CatUnidadMedida, String>(serviceCat, nameView)
+        GetAllComun<CatUnidadMedida, ObjectId>(serviceCat, nameView)
